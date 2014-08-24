@@ -4,7 +4,7 @@ var https = require('https');
 
 var InstagramHelper = function(client_id){
 
-    var path = '/v1/media/popular?client_id='+client_id+'&callback=JSON_CALLBACK';
+    var path = '/v1/media/popular?client_id='+client_id+'';
 
     // Options to make the request
     var options = {
