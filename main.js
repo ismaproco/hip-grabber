@@ -1,21 +1,12 @@
 'use strict';
 
-var http = require('http');
-var conf = require('conf');
+var conf = require('./conf');
+var InstagramHelper = require('./InstagramHelper');
 
-var options = {
-  host: 'https://api.instagram.com',
-  path: '/v1/media/popular?client_id=' + conf.CLIENT_ID + '&callback=JSON_CALLBACK'
-};
+var instagram = new InstagramHelper(conf.CLIENT_ID);
 
-callback = function(response) {
-  var str = '';
+console.log(instagram);
 
-  response.on('data', function (chunk) {
-    str += chunk;
-  });
-
-  response.on('end', function () {
-    console.log(str);
-  });
-}
+instagram.makeRequest(function(result){
+    console.log('received response'+1);
+});
