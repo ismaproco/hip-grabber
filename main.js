@@ -2,11 +2,36 @@
 
 var conf = require('./conf');
 var InstagramHelper = require('./InstagramHelper');
+var modelInstagram = require('./ModelInstagram');
 
 var instagram = new InstagramHelper(conf.CLIENT_ID);
 
 console.log(instagram);
 
-instagram.makeRequest(function(result){
-    console.log('received response'+1);
+modelInstagram.on('init',function(){
+
+    instagram.makeRequest(function(result){
+        var data = JSON.parse( result ).data;
+
+        for (var i = data.length - 1; i >= 0; i--) {
+
+            var dbo = modelInstagram.buildDataBaseObject( data[i] );
+            modelInstagram.save(dbo);
+        };
+
+        setTimeout(function(){
+            modelInstagram.close();
+        },2000);
+    });
+
 });
+
+
+modelInstagram.on('error',function(){
+    console.log(" --> Error");
+});
+
+modelInstagram.init();
+
+
+
