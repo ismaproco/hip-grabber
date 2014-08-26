@@ -6,40 +6,44 @@ var modelInstagram = require('./ModelInstagram');
 
 var instagram = new InstagramHelper(conf.CLIENT_ID);
 
-console.log(instagram);
 
-modelInstagram.on('init',function(){
+var executeInstagramOps = function () {
+    console.log(instagram);
 
-    instagram.makeRequest(function(result){
+    modelInstagram.on('init',function(){
 
-        console.log("RHIS ->"+result);
+        instagram.makeRequest(function(result){
 
-        var data = JSON.parse( result ).data;
+            var data = JSON.parse( result ).data;
 
-        // data exists?
-        if(data)
-        {
-            for (var i = data.length - 1; i >= 0; i--) {
-                var dbo = modelInstagram.buildDataBaseObject( data[i] );
-                modelInstagram.save(dbo);
-            };    
-        }
+            // data exists?
+            if(data)
+            {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    var dbo = modelInstagram.buildDataBaseObject( data[i] );
+                    modelInstagram.save(dbo);
+                };    
+            }
 
-        
-        //Close the connection after the execution of saves.
-        setTimeout(function(){
-            modelInstagram.close();
-        },2000);
+            
+            //Close the connection after the execution of saves.
+            setTimeout(function(){
+                modelInstagram.close();
+            },2000);
+        });
+
     });
 
-});
 
+    modelInstagram.on('error',function(){
+        console.log(" --> Error " );
+    });
 
-modelInstagram.on('error',function(){
-    console.log(" --> Error");
-});
+    modelInstagram.init();
+};
 
-modelInstagram.init();
+executeInstagramOps();
 
+setInterval(executeInstagramOps,60000);
 
 
