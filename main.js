@@ -6,11 +6,11 @@ var modelInstagram = require('./ModelInstagram');
 var logger = require('./ModelLogger');
 
 var instagram = new InstagramHelper(conf.CLIENT_ID);
-
+var appTimeInterval = conf.APP_TIMEOUT;
 
 var executeInstagramOps = function () {
     console.log(instagram);
-
+    logger.log("info", "START");
     modelInstagram.on('init',function(){
 
         instagram.makeRequest(function(result){
@@ -23,8 +23,8 @@ var executeInstagramOps = function () {
                 for (var i = data.length - 1; i >= 0; i--) {
                     var dbo = modelInstagram.buildDataBaseObject( data[i] );
                     modelInstagram.save(dbo);
-                    logger.log("info", "Instagram saved");
                 };    
+                logger.log("info", "Instagrams saved");
             }
 
             
@@ -48,6 +48,5 @@ var executeInstagramOps = function () {
 
 executeInstagramOps();
 
-setInterval(executeInstagramOps,60000);
-
+setInterval(executeInstagramOps,appTimeInterval);
 
