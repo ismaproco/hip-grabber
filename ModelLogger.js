@@ -37,7 +37,7 @@ function Actions() {
 	this.log = function(type, text) {
 
 		ModelLogger.init( mongoose,
-			"PopularInstagram", 
+			"log-instagram", 
 			ModelLogger.documentDefinition,
 			function(response){
 				if(response.status === "ok")

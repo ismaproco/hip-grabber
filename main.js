@@ -23,12 +23,14 @@ var executeInstagramOps = function () {
                 for (var i = data.length - 1; i >= 0; i--) {
                     var dbo = modelInstagram.buildDataBaseObject( data[i] );
                     modelInstagram.save(dbo);
+                    logger.log("info", "Instagram saved");
                 };    
             }
 
             
             //Close the connection after the execution of saves.
             setTimeout(function(){
+                logger.log("info", "Connection closed successfully ");        
                 modelInstagram.close();
             },2000);
         });
@@ -37,6 +39,7 @@ var executeInstagramOps = function () {
 
 
     modelInstagram.on('error',function(){
+        logger.log("error", "Unable to init the connection with the data base");
         console.log(" --> Error " );
     });
 
