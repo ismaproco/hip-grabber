@@ -2,5 +2,6 @@
 
 module.exports = {
 	MONGO_URL: "mongodb://localhost/mydb",
-	CLIENT_ID: "xxxxxxxxxxxxx"
+	CLIENT_ID: "xxxxxxxxxxxxxxxxxx",
+	APP_TIMEOUT: 60000
 }
