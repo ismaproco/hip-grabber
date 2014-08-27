@@ -37,13 +37,13 @@ function Actions() {
 	this.log = function(type, text) {
 
 		ModelLogger.init( mongoose,
-			"log-instagram", 
+			"logInstagram", 
 			ModelLogger.documentDefinition,
 			function(response){
 				if(response.status === "ok")
 				{
-					this.save({
-						date:new Date(),
+					ModelLogger.save({
+						date:new Date().getTime(),
 						type:type,
 						text:text
 					},function(){
