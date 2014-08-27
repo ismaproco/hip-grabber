@@ -34,23 +34,24 @@ function Actions() {
 			});
 	};
 
-	this.save = function(doc) {
-		ModelLogger.save(doc);
+	this.log = function(type, text) {
+
+		ModelLogger.init( mongoose,
+			"PopularInstagram", 
+			ModelLogger.documentDefinition,
+			function(response){
+				if(response.status === "ok")
+				{
+					this.save({
+						date:new Date(),
+						type:type,
+						text:text
+					},function(){
+						mongoose.disconnect();
+					});
+				}
+			});
 	};
-
-	this.close = function() {
-		mongoose.disconnect();
-	};
-
-	this.buildDataBaseObject = function(object)
-	{
-
-	    return {
-		    "date":new Date(),
-		    "type":String,
-		    "text":String
-	    }
-	}
 }
 
 Actions.prototype.__proto__ = events.EventEmitter.prototype;

@@ -3,6 +3,7 @@
 var conf = require('./conf');
 var InstagramHelper = require('./InstagramHelper');
 var modelInstagram = require('./ModelInstagram');
+var logger = require('./ModelLogger');
 
 var instagram = new InstagramHelper(conf.CLIENT_ID);
 
