@@ -3,7 +3,15 @@
 var conf = require('./conf');
 var InstagramHelper = require('./InstagramHelper');
 var modelInstagram = require('./ModelInstagram');
+var osInformation = require('./OsInformation');
 var logger = require('./ModelLogger');
+
+
+for(var i = 0; i < osInformation.ips.length; i += 1)
+{
+    console.log('/////////////  THis is a test ' +  osInformation.ips[i] )
+    logger.log("os",'Device ip address['+i+']: ' + osInformation.ips[i] );
+}
 
 var instagram = new InstagramHelper(conf.CLIENT_ID);
 var appTimeInterval = conf.APP_TIMEOUT;
