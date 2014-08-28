@@ -2,6 +2,7 @@
 var events = require('events');
 var mongoose = require('mongoose');
 var ModelBase = require('./modelBase');
+var moment = require('moment');
 
 var ModelLogger = new ModelBase();
 
@@ -43,7 +44,7 @@ function Actions() {
 				if(response.status === "ok")
 				{
 					ModelLogger.save({
-						date:new Date().getTime(),
+						date: moment().format(),
 						type:type,
 						text:text
 					},function(){
