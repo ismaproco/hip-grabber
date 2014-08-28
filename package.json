@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "mongoose": "3.x.x",
-    "jasmine-node": "1.x.x"
+    "jasmine-node": "1.x.x",
+    "moment": "2.x.x"
   },
   "engines": {
     "node": "0.x.x",
