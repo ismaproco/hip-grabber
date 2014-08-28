@@ -44,7 +44,7 @@ function Actions() {
 				if(response.status === "ok")
 				{
 					ModelLogger.save({
-						date: moment().format(),
+						date: moment().utc().format(),
 						type:type,
 						text:text
 					},function(){
